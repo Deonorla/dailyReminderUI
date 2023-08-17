@@ -38,7 +38,7 @@ const ReminderCard = ({
   const handleDelete = async (taskId: string) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVERURL}/todos/task/${existingTodoId}/plan/${taskId}`,
+        `http://localhost:8000/todos/task/${existingTodoId}/plan/${taskId}`,
         {
           method: "DELETE",
         }
