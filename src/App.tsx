@@ -43,6 +43,28 @@ function App() {
 
   useEffect(() => {
     getData();
+    // Fetch the reminders every minute (60000 milliseconds)
+    const fetchReminders = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVERURL}/todos/reminders/due`
+        );
+        if (response.status === 200) {
+          console.log("Reminders checked and sent if due.");
+        } else {
+          console.error("Failed to fetch reminders:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Failed to fetch reminders:", error);
+      }
+    };
+
+    // Fetch reminders immediately and then every minute
+    fetchReminders();
+    const intervalId = setInterval(fetchReminders, 30000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   // Sort by date

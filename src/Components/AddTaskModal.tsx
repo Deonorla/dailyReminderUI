@@ -4,6 +4,7 @@ import { Modal, DatePicker, Form, Input, TimePicker } from "antd";
 import CustomTextArea from "./CustomTextArea";
 import dayjs from "dayjs";
 import { useCookies } from "react-cookie";
+// import { SendSms } from "../../../server/services/SendSms";
 interface Props {
   modal: any;
   openState: any;
@@ -24,6 +25,7 @@ interface Todo {
     remind: string;
     day_date: string;
     day_time: string;
+    reminder_sent: false;
   }[];
 }
 type SizeType = Parameters<typeof Form>[0]["size"];
@@ -60,12 +62,13 @@ const AddTaskModal = ({
         remind: "",
         day_date: "",
         day_time: "",
+        reminder_sent: false,
       },
     ],
   });
-  useEffect(() => {
-    console.log("Final data", data);
-  }, [setData, data]);
+  // useEffect(() => {
+  //   console.log("Final data", data);
+  // }, [setData, data]);
 
   const addNewTask = async (e: any) => {
     e.preventDefault();
@@ -86,6 +89,7 @@ const AddTaskModal = ({
             remind: plan.remind,
             day_date: plan.day_date,
             day_time: plan.day_time,
+            reminder_sent: plan.reminder_sent,
           })),
         ];
 
@@ -134,6 +138,7 @@ const AddTaskModal = ({
         remind: "",
         day_date: "",
         day_time: "",
+        reminder_sent: false,
       });
     }
 
@@ -170,6 +175,7 @@ const AddTaskModal = ({
         remind: plan.remind,
         day_date: plan.day_date,
         day_time: plan.day_time,
+        reminder_sent: plan.reminder_sent,
       }));
 
       const updatedData = {
