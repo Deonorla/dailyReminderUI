@@ -22,13 +22,8 @@ const ReminderCard = ({
   existingTodoId,
 }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [checkedItems, setCheckedItems] = useState<{
-    [taskId: string]: boolean;
-  }>(
-    task.plans.reduce((acc: any, plan: any) => {
-      acc[plan.taskId] = false;
-      return acc;
-    }, {})
+  const [checkedItems, setCheckedItems] = useState<boolean[]>(
+    Array(task.plans.length).fill(false)
   );
 
   const [disabled, setDisabled] = useState(false);
@@ -36,11 +31,7 @@ const ReminderCard = ({
   const items: MenuProps["items"] = [
     {
       key: "1",
-      label: (
-        <div className="" onClick={() => handleDeleteList()}>
-          Delete
-        </div>
-      ),
+      label: <div className="">Delete</div>,
     },
   ];
 
@@ -61,30 +52,10 @@ const ReminderCard = ({
       console.error(error);
     }
   };
-
-  const handleDeleteList = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_SERVERURL}/todos/${existingTodoId}`,
-        {
-          method: "DELETE",
-        }
-      );
-      if (response.status === 200) {
-        getData();
-      } else {
-        console.error("Failed to delete List");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const onChange = (taskId: string) => {
-    setCheckedItems((prevCheckedItems) => ({
-      ...prevCheckedItems,
-      [taskId]: !prevCheckedItems[taskId],
-    }));
+  const onChange = (index: number) => {
+    const newCheckedItems = [...checkedItems];
+    newCheckedItems[index] = !newCheckedItems[index];
+    setCheckedItems(newCheckedItems);
   };
 
   return (
