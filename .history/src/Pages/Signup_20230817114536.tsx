@@ -64,16 +64,11 @@ const Signup = () => {
           />
         </div>
       </div>
-      <div className="bg-[#7E9AB7] z-10  md:m-[5rem] md:rounded-lg md:w-full xl:w-[60%]  w-full flex p-8 justify-center items-center ">
+      <div className="bg-[#7E9AB7] md:m-[5rem] md:rounded-lg md:w-full xl:w-[60%]  w-full flex p-8 justify-center items-center ">
         <img
           src={`logo.png`}
           alt=""
           className="w-[7rem] absolute top-6 left-4 "
-        />
-        <img
-          className="absolute w-[30rem] opacity-40 flex md:hidden right-[3%] z-[-1] top-[20%]"
-          src={`icon1.png`}
-          alt=""
         />
         <div className="">
           <div className="  md:col-span-1">
