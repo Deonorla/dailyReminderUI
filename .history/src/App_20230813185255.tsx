@@ -28,7 +28,6 @@ function App() {
   const authToken = cookie.AuthToken;
   const userEmail = cookie.Email;
   const [tasks, setTasks] = useState<Todo[]>([]);
-  const [details, setDetails] = useState("");
 
   const getData = async () => {
     try {
@@ -42,21 +41,8 @@ function App() {
     }
   };
 
-  const getUserDetails = async () => {
-    try {
-      const res = await fetch(
-        `${process.env.REACT_APP_SERVERURL}/user/${userEmail}`
-      );
-      const data = await res.json();
-      setDetails(data);
-    } catch (err) {
-      console.error("Error fetching user data:", err);
-    }
-  };
-
   useEffect(() => {
     getData();
-    getUserDetails();
     // Fetch the reminders every minute (60000 milliseconds)
     const fetchReminders = async () => {
       try {
